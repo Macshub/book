@@ -1,7 +1,10 @@
 Library::Application.routes.draw do
+  get "pages/home"
+
   devise_for :users
 
-  get "pages/home"
+  get "book/index"
+  get "book/new"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

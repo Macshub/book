@@ -1,0 +1,22 @@
+<% content_for :title, (I18n.t "devise.sessions.new.title") %>
+<div class="row">
+  <div class="small-12 large-6 large-offset-3 columns">
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "custom" }) do |f| %>
+      <fieldset>
+        <legend><%= I18n.t "devise.sessions.new.title" %></legend>
+        <%= f.label :email, (I18n.t "form.email") %>
+        <%= f.email_field :email, :autofocus => true %>
+        <%= f.label :password, (I18n.t "form.password") %>
+        <%= f.password_field :password %>
+        <% if devise_mapping.rememberable? -%>
+          <%= f.label :remember_me do %>
+            <%= f.check_box :remember_me, :style => "display:none;" %>
+            <span class="custom checkbox"></span> <%= I18n.t "form.remember_me" %>
+          <% end %>
+        <% end -%>
+        <%= f.submit (I18n.t "devise.sessions.new.title"), :class => "button" %>
+      </fieldset>
+    <% end %>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

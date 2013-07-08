@@ -21,10 +21,27 @@
   </head>
 
   <body>
-
+    <% if user_signed_in? %>
+      <nav class="top-bar">
+        <ul class="title-area">
+          <li class="name">
+            <h1><%= link_to (I18n.t "book.index.title"), book_index_url %></h1>
+          </li>
+          <li class="toggle-topbar menu-icon">
+            <a href="#">
+              <span><%= I18n.t "layout.application.menu" %></span>
+            </a>
+          </li>
+        </ul>
+        <section class="top-bar-section">
+          <ul class="right">
+            <li class="divider"></li>
+            <li><%= link_to (I18n.t "layout.application.sign_out"), destroy_user_session_url, :method => :delete %></li>
+          </ul>
+        </section>
+      </nav>
+    <% end %>
     <%= yield %>
-
-    
     <%= javascript_include_tag "application" %>
   </body>
 </html>

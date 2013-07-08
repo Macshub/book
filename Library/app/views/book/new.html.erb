@@ -1,0 +1,14 @@
+<% content_for :title, (I18n.t "book.new.title") %>
+<div class="row">
+  <div class="small-12 large-6 large-offset-3 columns">
+    <%= form_for :book do |f| %>
+      <fieldset>
+        <legend><%= I18n.t "book.new.title" %></legend>
+        <%= f.label :isbn, (I18n.t "form.isbn") %>
+        <%= f.text_field :isbn %>
+        <%= f.submit (I18n.t "book.new.search"), :class => "button" %>
+      </fieldset>
+    <% end %>
+    <%= link_to (I18n.t "book.index.title"), book_index_url %>
+  </div>
+</div>

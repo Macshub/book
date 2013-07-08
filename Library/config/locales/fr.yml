@@ -1,0 +1,43 @@
+fr:
+  model:
+    book:
+      status:
+        to_buy: "à acheter"
+        to_read: "à lire"
+        already_read: "déjà lu"
+  form:
+    email: "Email"
+    isbn: "ISBN"
+    password: "Mot de passe"
+    password_confirmation: "Confirmer le mot de passe"
+    remember_me: "Se souvenir de moi"
+  book:
+    index:
+      title: "Accueil"
+      books_empty: "Vous n'avez aucun livre"
+    new:
+      title: "Ajouter un livre"
+      search: "Rechercher le livre"
+  devise:
+    passwords:
+      new:
+        title: "Mot de passe oublié ?"
+        submit: "Réinitialiser le mot de passe"
+    registrations:
+      new:
+        title: "Inscription"
+    sessions:
+      new:
+        title: "Connexion"
+    shared:
+      links:
+        sign_in: "Se connecter"
+        sign_up: "S'inscrire"
+        password_forgotten: "Mot de passe oublié ?"
+        confirmation_instructions: "Instructions de confirmation non reçues ?"
+        unlock_instructions: "Instructions de déblocage non reçues ?"
+        omniauth_sign_in: "Se connecter avec #{provider.to_s.titleize}"
+  layout:
+    application:
+      menu: "Menu"
+      sign_out: "Se déconnecter"
