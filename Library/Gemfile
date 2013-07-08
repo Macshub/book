@@ -8,7 +8,7 @@ gem 'rails', '3.2.13'
 gem 'activerecord-postgresql-adapter'
 gem 'devise'
 
-# Gems for Api
+# Gem for API
 gem 'nokogiri'
 
 
