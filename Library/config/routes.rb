@@ -1,10 +1,13 @@
 Library::Application.routes.draw do
-  get "pages/home"
-
+  resources :books do
+    member do
+      get 'get'
+    end
+    collection do
+      post 'search'
+    end
+  end
   devise_for :users
-
-  get "book/index"
-  get "book/new"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
