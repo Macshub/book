@@ -11,13 +11,16 @@ fr:
     password: "Mot de passe"
     password_confirmation: "Confirmer le mot de passe"
     remember_me: "Se souvenir de moi"
-  book:
+  books:
     index:
       title: "Accueil"
       books_empty: "Vous n'avez aucun livre"
     new:
       title: "Ajouter un livre"
-      search: "Rechercher le livre"
+      submit: "Rechercher le livre"
+    search:
+      title: "Confirmer l'ajout du livre"
+      submit: "Ajouter"
   devise:
     passwords:
       new:

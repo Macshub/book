@@ -1,1 +1,25 @@
-<p><%= @book.title %></p>
+<% content_for :title, I18n.t("books.search.title") %>
+<div class="row">
+  <div class="small-12 columns">
+    <%= form_for(:book, url: books_url) do |f| %>
+      <fieldset>
+        <legend><%= I18n.t "books.search.title" %></legend>
+        <p>
+          <%= @book.isbn %><br />
+          <%= @book.isbn13 %><br />
+          <%= @book.title %><br />
+          <%= @book.author_name %><br />
+          <%= @book.cover %><br />
+          <%= @book.description %><br />
+          <%= @book.pages %><br />
+          <%= @book.publication %><br />
+          <%= @book.original_publication %><br />
+          <%= @book.publisher %><br />
+          <%= @book.rating %><br />
+        </p>
+        <%= f.hidden_field :isbn, value: @book.isbn %>
+        <%= f.submit I18n.t("books.search.title"), :class => "button" %>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

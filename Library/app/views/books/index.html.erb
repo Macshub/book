@@ -1,9 +1,9 @@
-<% content_for :title, (I18n.t "book.index.title") %>
+<% content_for :title, I18n.t("books.index.title") %>
 <div class="row">
   <div class="small-12 columns">
-    <h1><%= I18n.t "book.index.title" %></h1>
+    <h1><%= I18n.t "books.index.title" %></h1>
     <% if @books.empty? %>
-      <p><%= I18n.t "book.index.books_empty" %></p>
+      <p><%= I18n.t "books.index.books_empty" %></p>
     <% else %>
       <ul>
         <% @books.each do |book| %>
@@ -11,6 +11,6 @@
         <% end %>
       </ul>
     <% end %>
-    <%= link_to I18n.t("book.new.title"), new_book_url %>
+    <%= link_to I18n.t("books.new.title"), new_book_url %>
   </div>
 </div>
