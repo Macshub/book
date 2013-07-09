@@ -19,6 +19,8 @@ fr:
     remember_me: "Se souvenir de moi"
     status: "État"
   books:
+    destroy:
+      title: "Supprimer le livre"
     edit:
       title: "Éditer le livre"
     get:
@@ -37,7 +39,7 @@ fr:
       book_isbn: "ISBN :"
       book_isbn13: "ISBN13 :"
       book_title: "Titre :"
-      book_author_name: "Auteur :"
+      book_author: "Auteur :"
       book_description: "Description :"
       book_pages: "Nombre de pages :"
       book_publication: "Date de publication :"

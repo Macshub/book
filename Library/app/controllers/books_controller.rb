@@ -4,6 +4,11 @@ class BooksController < ApplicationController
     @book.save
     redirect_to books_url
   end
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    redirect_to books_url
+  end
   def edit
     @book = Book.find(params[:id])
   end
@@ -14,6 +19,11 @@ class BooksController < ApplicationController
     @books = current_user.book
   end
   def new
+  end
+  def update
+    @book = Book.find(params[:id])
+    @book.update_attributes(params[:book])
+    redirect_to books_url
   end
   def search
     @books = Book.search(params[:book][:isbn], params[:book][:title])

@@ -7,12 +7,12 @@
         <%= f.label :status, I18n.t("form.status") %>
         <%= f.select :status, [[I18n.t("model.book.status.to_buy"), "model.book.status.to_buy"], [I18n.t("model.book.status.to_read"), "model.book.status.to_read"], [I18n.t("model.book.status.already_read"), "model.book.status.already_read"]], value: @book.status %>
         <%= f.label :lent do %>
-          <%= f.check_box :lent, :style => "display:none;" %>
+          <%= f.check_box :lent, value: @book.lent.to_s, style: "display:none;" %>
           <span class="custom checkbox"></span> <%= I18n.t "form.lent" %>
         <% end %>
         <%= f.label :record, I18n.t("form.record") %>
         <%= f.text_area :record, value: @book.record %>
-        <%= f.submit I18n.t("books.edit.title"), :class => "button" %>
+        <%= f.submit I18n.t("books.edit.title"), class: "button" %>
       </fieldset>
     <% end %>
   </div>

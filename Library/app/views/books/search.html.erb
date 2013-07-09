@@ -29,7 +29,7 @@
           <%= f.hidden_field :original_publication, value: book.original_publication %>
           <%= f.hidden_field :publisher, value: book.publisher %>
           <%= f.hidden_field :rating, value: book.rating %>
-          <%= f.submit I18n.t("books.search.title"), :class => "button" %>
+          <%= f.submit I18n.t("books.search.title"), class: "button" %>
         </fieldset>
       <% end %>
     </div>

@@ -17,6 +17,7 @@
       <%= I18n.t "books.get.book_record" %> <%= @book.record %><br />
       <%= I18n.t "books.get.book_status" %> <%= I18n.t @book.status %><br />
     </p>
-    <%= link_to I18n.t("books.edit.title"), edit_book_url, :class => "button" %>
+    <%= link_to I18n.t("books.edit.title"), edit_book_url, class: "button" %>
+    <%= link_to I18n.t("books.destroy.title"), book_url, method: :delete, class: "button alert" %>
   </div>
 </div>
