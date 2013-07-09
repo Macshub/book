@@ -17,6 +17,8 @@ class Book < ActiveRecord::Base
   validates :rating, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }, allow_nil: true
   validates :status, inclusion: { in: %w(model.book.status.to_buy model.book.status.to_read model.book.status.already_read) }
 
+  paginates_per 3
+
   def self.fetch_info(response)
     if response.is_a?(Array)
       books = []

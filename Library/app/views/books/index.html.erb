@@ -10,7 +10,7 @@
           <li><%= link_to book.title, book_url(book.id) %></li>
         <% end %>
       </ul>
+      <%= paginate @books, :window => 2, :outer_window => 2 %>
     <% end %>
-    <%= link_to I18n.t("books.new.title"), new_book_url, class: "button" %>
   </div>
 </div>
