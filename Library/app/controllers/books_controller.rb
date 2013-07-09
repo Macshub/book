@@ -36,6 +36,9 @@ class BooksController < ApplicationController
   end
   def search
     @books = Book.search(params[:book][:isbn], { title: params[:book][:title] })
+    unless @books.map{|book| book[:message]}.include? 'ok'
+      redirect_to new_book_url(message: @books.first[:message])
+    end
   end
   def show
     @book = Book.find(params[:id])

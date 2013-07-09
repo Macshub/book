@@ -1,4 +1,14 @@
 <% content_for :title, I18n.t("books.new.title") %>
+<% if params[:message] %>
+  <div class="row">
+    <div class="small-12 columns">
+      <div data-alert class="alert-box alert">
+        <%= params[:message] %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    </div>
+  </div>
+<% end %>
 <div class="row">
   <div class="small-12 large-6 large-offset-3 columns">
     <%= form_for(:book, url: search_books_url) do |f| %>

@@ -17,27 +17,58 @@ class Book < ActiveRecord::Base
   validates :rating, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }, allow_nil: true
   validates :status, inclusion: { in: %w(model.book.status.to_buy model.book.status.to_read model.book.status.already_read) }
 
-  def self.fetch_info(hash_books)
-    books = []
-    book = Book.new(
-      author: hash_books.authors.author.name,
-      cover: hash_books.image_url,
-      description: hash_books.description,
-      isbn: hash_books.isbn,
-      isbn13: hash_books.isbn13,
-      pages: hash_books.num_pages,
-      publication: Date.parse(hash_books.work.publication_year.to_s + '-01-01'),
-      publisher: hash_books.publisher,
-      rating: hash_books.average_rating,
-      title: hash_books.title
-    )
-    if hash_books.work.original_publication_year > 0
-      book.original_publication = Date.parse(hash_books.work.original_publication_year.to_s + '-01-01')
+  def self.fetch_info(response)
+    if response.is_a?(Array)
+      books = []
+      response.results.work.each do |result|
+        book = Book.new(
+          author: result.authors.author.name,
+          cover: result.image_url,
+          description: result.description,
+          isbn: result.isbn,
+          isbn13: result.isbn13,
+          pages: result.num_pages,
+          publication: Date.parse(result.work.publication_year.to_s + '-01-01'),
+          publisher: result.publisher,
+          rating: result.average_rating,
+          title: result.title
+        )
+        unless result.work.original_publication_year.nil?
+          if result.work.original_publication_year > 0
+            book.original_publication = Date.parse(result.work.original_publication_year.to_s + '-01-01')
+          else
+            book.original_publication = Date.new(0003-01-01)
+          end
+        else
+          book.original_publication = Date.new(0003-01-01)
+        end
+        books << book
+      end
+      return books
     else
-      book.original_publication = Date.new(0003-01-01)
+      book = Book.new(
+        author: response.authors.author.name,
+        cover: response.image_url,
+        description: response.description,
+        isbn: response.isbn,
+        isbn13: response.isbn13,
+        pages: response.num_pages,
+        publication: Date.parse(response.work.publication_year.to_s + '-01-01'),
+        publisher: response.publisher,
+        rating: response.average_rating,
+        title: response.title
+      )
+      unless response.work.original_publication_year.nil?
+        if response.work.original_publication_year > 0
+        book.original_publication = Date.parse(response.work.original_publication_year.to_s + '-01-01')
+        else
+          book.original_publication = Date.new(0003-01-01)
+        end
+      else
+        book.original_publication = Date.new(0003-01-01)
+      end
+      return book
     end
-    books << book
-    return books
   end
 
   def self.search(isbn, options = {})
@@ -50,20 +81,24 @@ class Book < ActiveRecord::Base
       if isbn.is_a?(Array)
         isbn.each do |isbn_single|
           begin
-            books << Book.fetch_info(client.book_by_isbn(isbn_single))
+            books << { book: Book.fetch_info(client.book_by_isbn(isbn_single)), message: 'ok' }
             books_found << isbn_single
             p isbn_single + ' => ok'
-          rescue
+          rescue Exception => e
+            books << { book: nil, message: e }
             books_not_found << isbn_single
             p isbn_single + ' => ko'
           end
         end
-        books = books.flatten
       else
-        books = Book.fetch_info(client.book_by_isbn(isbn))
+        begin
+          books << { book: Book.fetch_info(client.book_by_isbn(isbn)), message: 'ok' }
+        rescue Exception => e
+          books << { book: nil, message: e }
+        end
       end
     elsif !options[:title].blank?
-      books = Book.fetch_info(client.book_by_title(options[:title]))  
+      books = Book.fetch_info(client.search_books(options[:title]))  
     end
     if options[:user_id]
       books.each do |book|
