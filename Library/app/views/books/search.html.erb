@@ -21,7 +21,7 @@
               <%= I18n.t "books.search.book_title" %> <%= book[:book].title %><br />
               <%= I18n.t "books.search.book_author" %> <%= book[:book].author %><br />
               <%= image_tag book[:book].cover %><br />
-              <%= I18n.t "books.search.book_description" %> <%= book[:book].description %><br />
+              <%= I18n.t "books.search.book_description" %> <%= unless book[:book].description.nil? then book[:book].description.html_safe end %><br />
               <%= I18n.t "books.search.book_pages" %> <%= book[:book].pages %><br />
               <%= I18n.t "books.search.book_publication" %> <%= book[:book].publication.year %><br />
               <%= I18n.t "books.search.book_original_publication" %> <%= book[:book].original_publication.year %><br />

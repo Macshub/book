@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
+
+  def has_already_book?(isbn, isbn13)
+    return self.books.map(&:isbn).include?(isbn) || self.books.map(&:isbn13).include?(isbn13)
+  end
 end

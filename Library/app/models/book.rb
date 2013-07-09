@@ -2,6 +2,8 @@ class Book < ActiveRecord::Base
   belongs_to :user
   attr_accessible :user_id, :author, :cover, :description, :isbn, :isbn13, :lent, :original_publication, :pages, :publication, :publisher, :rating, :record, :status, :title
 
+  paginates_per 10
+
   before_validation do |book|
     if book.new_record?
       if book.lent.blank? then book.lent = false end
@@ -9,15 +11,18 @@ class Book < ActiveRecord::Base
       if book.status.blank? then book.status = 'model.book.status.to_buy' end
     end
   end
+  # Filter preventing book duplication, not working
+  # before_create do |book|
+  #   if User.find(book.user_id).has_already_book?(book.isbn, book.isbn13)
+  #     errors.add(exists: I18n.t('form.has_already_book'))
+  #   end
+  # end
 
   validates_associated :user
   validates :author, :isbn, :isbn13, :status, :title, presence: true
-  validates :isbn, length: { in: 9..10 }
   validates :isbn13, length: { is: 13 }
   validates :rating, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }, allow_nil: true
   validates :status, inclusion: { in: %w(model.book.status.to_buy model.book.status.to_read model.book.status.already_read) }
-
-  paginates_per 3
 
   def self.fetch_info(response)
     if response.is_a?(Array)
@@ -86,8 +91,8 @@ class Book < ActiveRecord::Base
             books << { book: Book.fetch_info(client.book_by_isbn(isbn_single)), message: 'ok' }
             books_found << isbn_single
             p isbn_single + ' => ok'
-          rescue Exception => e
-            books << { book: nil, message: e }
+          rescue
+            books << { book: nil, message: I18n.t('form.not_found') }
             books_not_found << isbn_single
             p isbn_single + ' => ko'
           end
@@ -95,21 +100,29 @@ class Book < ActiveRecord::Base
       else
         begin
           books << { book: Book.fetch_info(client.book_by_isbn(isbn)), message: 'ok' }
-        rescue Exception => e
-          books << { book: nil, message: e }
+        rescue
+          books << { book: nil, message: I18n.t('form.not_found') }
         end
       end
     elsif !options[:title].blank?
-      books = Book.fetch_info(client.search_books(options[:title]))  
+      begin
+        books << { book: Book.fetch_info(client.book_by_title(options[:title])), message: 'ok' }
+      rescue
+        books << { book: nil, message: I18n.t('form.not_found') }
+      end
     end
     if options[:user_id]
       books.each do |book|
-        book.user_id = options[:user_id]
+        if book[:message] == 'ok'
+          book[:book].user_id = options[:user_id]
+        end
       end
     end
     if options[:save_search]
       books.each do |book|
-        book.save
+        if book[:message] == 'ok'
+          book[:book].save
+        end
       end
     end
     result = { ok: [ books_found.size, books_found ], ko: [ books_not_found.size, books_not_found ] }

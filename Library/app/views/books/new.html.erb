@@ -1,9 +1,11 @@
 <% content_for :title, I18n.t("books.new.title") %>
-<% if params[:message] %>
+<% unless @books.nil? %>
   <div class="row">
     <div class="small-12 columns">
       <div data-alert class="alert-box alert">
-        <%= params[:message] %>
+        <% @books.each do |book| %>
+          <div><%= book[:message] %></div>
+        <% end %>
         <a href="#" class="close">&times;</a>
       </div>
     </div>

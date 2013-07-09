@@ -17,8 +17,11 @@ fr:
         already_read: "déjà lu"
   form:
     email: "Email"
+    has_already_book: "Vous avez déjà ce livre"
     isbn: "ISBN"
     lent: "Prêté"
+    not_found: "Livre non trouvé"
+    not_saved: "Le livre n'a pas pu être ajouté"
     password: "Mot de passe"
     password_confirmation: "Confirmer le mot de passe"
     record: "Fiche de lecture"

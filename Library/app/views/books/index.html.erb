@@ -10,7 +10,7 @@
           <li><%= link_to book.title, book_url(book.id) %></li>
         <% end %>
       </ul>
-      <%= paginate @books, :window => 2, :outer_window => 2 %>
+      <%= paginate @books, window: 1, outer_window: 1 %>
     <% end %>
   </div>
 </div>

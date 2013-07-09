@@ -7,7 +7,7 @@
       <%= I18n.t "books.search.book_title" %> <%= @book.title %><br />
       <%= I18n.t "books.search.book_author" %> <%= @book.author %><br />
       <%= image_tag @book.cover %><br />
-      <%= I18n.t "books.search.book_description" %> <%= @book.description %><br />
+      <%= I18n.t "books.search.book_description" %> <%= unless @book.description.nil? then @book.description.html_safe end %><br />
       <%= I18n.t "books.search.book_pages" %> <%= @book.pages %><br />
       <%= I18n.t "books.search.book_publication" %> <%= @book.publication %><br />
       <%= I18n.t "books.search.book_original_publication" %> <%= @book.original_publication %><br />
