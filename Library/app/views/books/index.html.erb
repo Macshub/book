@@ -7,10 +7,10 @@
     <% else %>
       <ul>
         <% @books.each do |book| %>
-          <li><%= book.title %></li>
+          <li><%= link_to book.title, get_book_url(book.id) %></li>
         <% end %>
       </ul>
     <% end %>
-    <%= link_to I18n.t("books.new.title"), new_book_url %>
+    <%= link_to I18n.t("books.new.title"), new_book_url, :class => "button" %>
   </div>
 </div>

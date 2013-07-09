@@ -8,19 +8,19 @@
           <%= I18n.t "books.search.book_isbn" %> <%= @book.isbn %><br />
           <%= I18n.t "books.search.book_isbn13" %> <%= @book.isbn13 %><br />
           <%= I18n.t "books.search.book_title" %> <%= @book.title %><br />
-          <%= I18n.t "books.search.book_author_name" %> <%= @book.author_name %><br />
+          <%= I18n.t "books.search.book_author" %> <%= @book.author %><br />
           <%= image_tag @book.cover %><br />
           <%= I18n.t "books.search.book_description" %> <%= @book.description %><br />
           <%= I18n.t "books.search.book_pages" %> <%= @book.pages %><br />
           <%= I18n.t "books.search.book_publication" %> <%= @book.publication %><br />
           <%= I18n.t "books.search.book_original_publication" %> <%= @book.original_publication %><br />
           <%= I18n.t "books.search.book_publisher" %> <%= @book.publisher %><br />
-          <%= I18n.t "books.search.book_rating" %> <%= @book.rating %><br />
+          <%= I18n.t "books.search.book_rating" %> <%= @book.rating %>
         </p>
         <%= f.hidden_field :isbn, value: @book.isbn %>
         <%= f.hidden_field :isbn13, value: @book.isbn13 %>
         <%= f.hidden_field :title, value: @book.title %>
-        <%= f.hidden_field :author_name, value: @book.author_name %>
+        <%= f.hidden_field :author, value: @book.author %>
         <%= f.hidden_field :cover, value: @book.cover %>
         <%= f.hidden_field :description, value: @book.description %>
         <%= f.hidden_field :pages, value: @book.pages %>

@@ -36,6 +36,8 @@
         <section class="top-bar-section">
           <ul class="right">
             <li class="divider"></li>
+            <li><%= link_to I18n.t("books.new.title"), new_book_url %></li>
+            <li class="divider"></li>
             <li><%= link_to I18n.t("layout.application.sign_out"), destroy_user_session_url, :method => :delete %></li>
           </ul>
         </section>

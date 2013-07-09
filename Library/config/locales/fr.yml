@@ -1,4 +1,8 @@
 fr:
+  helper:
+    boolean:
+      is_true: "Oui"
+      is_false: "Non"
   model:
     book:
       status:
@@ -8,10 +12,20 @@ fr:
   form:
     email: "Email"
     isbn: "ISBN"
+    lent: "Prêté"
     password: "Mot de passe"
     password_confirmation: "Confirmer le mot de passe"
+    record: "Fiche de lecture"
     remember_me: "Se souvenir de moi"
+    status: "État"
   books:
+    edit:
+      title: "Éditer le livre"
+    get:
+      title: "Livre : %{title}"
+      book_lent: "Prêté :"
+      book_record: "Fiche de lecture :"
+      book_status: "État :"
     index:
       title: "Accueil"
       books_empty: "Vous n'avez aucun livre"

@@ -1,0 +1,19 @@
+<% content_for :title, I18n.t("books.edit.title", title: @book.title) %>
+<div class="row">
+  <div class="small-12 columns">
+    <%= form_for(:book, url: book_url, html: { method: :put, class: "custom" }) do |f| %>
+      <fieldset>
+        <legend><%= I18n.t "books.edit.title" %></legend>
+        <%= f.label :status, I18n.t("form.status") %>
+        <%= f.select :status, [[I18n.t("model.book.status.to_buy"), "model.book.status.to_buy"], [I18n.t("model.book.status.to_read"), "model.book.status.to_read"], [I18n.t("model.book.status.already_read"), "model.book.status.already_read"]], value: @book.status %>
+        <%= f.label :lent do %>
+          <%= f.check_box :lent, :style => "display:none;" %>
+          <span class="custom checkbox"></span> <%= I18n.t "form.lent" %>
+        <% end %>
+        <%= f.label :record, I18n.t("form.record") %>
+        <%= f.text_area :record, value: @book.record %>
+        <%= f.submit I18n.t("books.edit.title"), :class => "button" %>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

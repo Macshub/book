@@ -1,9 +1,17 @@
 class BooksController < ApplicationController
   def create
-    # TODO :: Fill this action
+    @book = Book.new(params[:book].merge({ :user_id => current_user.id }))
+    @book.save
+    redirect_to books_url
+  end
+  def edit
+    @book = Book.find(params[:id])
+  end
+  def get
+    @book = Book.find(params[:id])
   end
   def index
-    @books = Book.all
+    @books = current_user.book
   end
   def new
   end
@@ -22,7 +30,7 @@ class BooksController < ApplicationController
       original_publication = Date.parse(url.xpath("original_publication_year").text + '-' + url.xpath("original_publication_month").text + '-' + url.xpath("original_publication_day").text)
     end
     api_result = {
-      author_name: url.xpath("authors/author/name").text,
+      author: url.xpath("authors/author/name").text,
       cover: url.xpath("image_url").text,
       description: url.xpath("description").text,
       isbn: url.xpath("isbn").text,
@@ -38,7 +46,7 @@ class BooksController < ApplicationController
 
     book_hash = api_result
     @book = Book.new(
-      author_name: book_hash[:author_name],
+      author: book_hash[:author],
       cover: book_hash[:cover],
       description: book_hash[:description],
       isbn: book_hash[:isbn],
