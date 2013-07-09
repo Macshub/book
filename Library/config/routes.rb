@@ -1,8 +1,5 @@
 Library::Application.routes.draw do
   resources :books do
-    member do
-      get 'get'
-    end
     collection do
       post 'search'
     end

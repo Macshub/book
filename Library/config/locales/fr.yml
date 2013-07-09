@@ -24,11 +24,6 @@ fr:
       title: "Supprimer le livre"
     edit:
       title: "Éditer le livre"
-    get:
-      title: "Livre : %{title}"
-      book_lent: "Prêté :"
-      book_record: "Fiche de lecture :"
-      book_status: "État :"
     index:
       title: "Accueil"
       books_empty: "Vous n'avez aucun livre"
@@ -48,6 +43,11 @@ fr:
       book_publisher: "Éditeur :"
       book_rating: "Note :"
       submit: "Ajouter"
+    show:
+      title: "Livre : %{title}"
+      book_lent: "Prêté :"
+      book_record: "Fiche de lecture :"
+      book_status: "État :"
   devise:
     passwords:
       new:

@@ -7,7 +7,7 @@
     <% else %>
       <ul>
         <% @books.each do |book| %>
-          <li><%= link_to book.title, get_book_url(book.id) %></li>
+          <li><%= link_to book.title, book_url(book.id) %></li>
         <% end %>
       </ul>
     <% end %>

@@ -1,4 +1,4 @@
-<% content_for :title, I18n.t("books.get.title", title: @book.title) %>
+<% content_for :title, I18n.t("books.show.title", title: @book.title) %>
 <div class="row">
   <div class="small-12 columns">
     <p>
@@ -13,9 +13,9 @@
       <%= I18n.t "books.search.book_original_publication" %> <%= @book.original_publication %><br />
       <%= I18n.t "books.search.book_publisher" %> <%= @book.publisher %><br />
       <%= I18n.t "books.search.book_rating" %> <%= @book.rating %><br />
-      <%= I18n.t "books.get.book_lent" %> <%= I18n.t("helper.boolean.is_" + @book.lent.to_s) %><br />
-      <%= I18n.t "books.get.book_record" %> <%= @book.record %><br />
-      <%= I18n.t "books.get.book_status" %> <%= I18n.t @book.status %><br />
+      <%= I18n.t "books.show.book_lent" %> <%= I18n.t("helper.boolean.is_" + @book.lent.to_s) %><br />
+      <%= I18n.t "books.show.book_record" %> <%= @book.record %><br />
+      <%= I18n.t "books.show.book_status" %> <%= I18n.t @book.status %><br />
     </p>
     <%= link_to I18n.t("books.edit.title"), edit_book_url, class: "button" %>
     <%= link_to I18n.t("books.destroy.title"), book_url, method: :delete, class: "button alert" %>
