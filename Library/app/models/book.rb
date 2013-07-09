@@ -25,7 +25,6 @@ class Book < ActiveRecord::Base
       description: hash_books.description,
       isbn: hash_books.isbn,
       isbn13: hash_books.isbn13,
-      #original_publication: Date.parse(hash_books.work.original_publication_year.to_s + '-01-01'),
       pages: hash_books.num_pages,
       publication: Date.parse(hash_books.work.publication_year.to_s + '-01-01'),
       publisher: hash_books.publisher,
@@ -76,6 +75,8 @@ class Book < ActiveRecord::Base
         book.save
       end
     end
-    p { ok: [books_found.size, books_found], ko: [books_not_found.size, books_not_found] }
+    result = { ok: [ books_found.size, books_found ], ko: [ books_not_found.size, books_not_found ] }
+    p result.inspect
+    return books
   end
 end
