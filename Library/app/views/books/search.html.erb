@@ -1,35 +1,37 @@
 <% content_for :title, I18n.t("books.search.title") %>
-<div class="row">
-  <div class="small-12 columns">
-    <%= form_for(:book, url: books_url) do |f| %>
-      <fieldset>
-        <legend><%= I18n.t "books.search.title" %></legend>
-        <p>
-          <%= I18n.t "books.search.book_isbn" %> <%= @book.isbn %><br />
-          <%= I18n.t "books.search.book_isbn13" %> <%= @book.isbn13 %><br />
-          <%= I18n.t "books.search.book_title" %> <%= @book.title %><br />
-          <%= I18n.t "books.search.book_author" %> <%= @book.author %><br />
-          <%= image_tag @book.cover %><br />
-          <%= I18n.t "books.search.book_description" %> <%= @book.description %><br />
-          <%= I18n.t "books.search.book_pages" %> <%= @book.pages %><br />
-          <%= I18n.t "books.search.book_publication" %> <%= @book.publication %><br />
-          <%= I18n.t "books.search.book_original_publication" %> <%= @book.original_publication %><br />
-          <%= I18n.t "books.search.book_publisher" %> <%= @book.publisher %><br />
-          <%= I18n.t "books.search.book_rating" %> <%= @book.rating %>
-        </p>
-        <%= f.hidden_field :isbn, value: @book.isbn %>
-        <%= f.hidden_field :isbn13, value: @book.isbn13 %>
-        <%= f.hidden_field :title, value: @book.title %>
-        <%= f.hidden_field :author, value: @book.author %>
-        <%= f.hidden_field :cover, value: @book.cover %>
-        <%= f.hidden_field :description, value: @book.description %>
-        <%= f.hidden_field :pages, value: @book.pages %>
-        <%= f.hidden_field :publication, value: @book.publication %>
-        <%= f.hidden_field :original_publication, value: @book.original_publication %>
-        <%= f.hidden_field :publisher, value: @book.publisher %>
-        <%= f.hidden_field :rating, value: @book.rating %>
-        <%= f.submit I18n.t("books.search.title"), :class => "button" %>
-      </fieldset>
-    <% end %>
+<% @books.each do |book| %>
+  <div class="row">
+    <div class="small-12 columns">
+      <%= form_for(:book, url: books_url) do |f| %>
+        <fieldset>
+          <legend><%= I18n.t "books.search.title" %></legend>
+          <p>
+            <%= I18n.t "books.search.book_isbn" %> <%= book.isbn %><br />
+            <%= I18n.t "books.search.book_isbn13" %> <%= book.isbn13 %><br />
+            <%= I18n.t "books.search.book_title" %> <%= book.title %><br />
+            <%= I18n.t "books.search.book_author" %> <%= book.author %><br />
+            <%= image_tag book.cover %><br />
+            <%= I18n.t "books.search.book_description" %> <%= book.description %><br />
+            <%= I18n.t "books.search.book_pages" %> <%= book.pages %><br />
+            <%= I18n.t "books.search.book_publication" %> <%= book.publication.year %><br />
+            <%= I18n.t "books.search.book_original_publication" %> <%= book.original_publication.year %><br />
+            <%= I18n.t "books.search.book_publisher" %> <%= book.publisher %><br />
+            <%= I18n.t "books.search.book_rating" %> <%= book.rating %>
+          </p>
+          <%= f.hidden_field :isbn, value: book.isbn %>
+          <%= f.hidden_field :isbn13, value: book.isbn13 %>
+          <%= f.hidden_field :title, value: book.title %>
+          <%= f.hidden_field :author, value: book.author %>
+          <%= f.hidden_field :cover, value: book.cover %>
+          <%= f.hidden_field :description, value: book.description %>
+          <%= f.hidden_field :pages, value: book.pages %>
+          <%= f.hidden_field :publication, value: book.publication %>
+          <%= f.hidden_field :original_publication, value: book.original_publication %>
+          <%= f.hidden_field :publisher, value: book.publisher %>
+          <%= f.hidden_field :rating, value: book.rating %>
+          <%= f.submit I18n.t("books.search.title"), :class => "button" %>
+        </fieldset>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
