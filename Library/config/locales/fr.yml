@@ -18,6 +18,7 @@ fr:
     record: "Fiche de lecture"
     remember_me: "Se souvenir de moi"
     status: "État"
+    title: "Titre"
   books:
     destroy:
       title: "Supprimer le livre"

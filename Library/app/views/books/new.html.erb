@@ -6,6 +6,8 @@
         <legend><%= I18n.t "books.new.title" %></legend>
         <%= f.label :isbn, I18n.t("form.isbn") %>
         <%= f.text_field :isbn %>
+        <%= f.label :title, I18n.t("form.title") %>
+        <%= f.text_field :title %>
         <%= f.submit I18n.t("books.new.submit"), class: "button" %>
       </fieldset>
     <% end %>
