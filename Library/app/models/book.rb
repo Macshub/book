@@ -19,31 +19,63 @@ class Book < ActiveRecord::Base
 
   def self.fetch_info(hash_books)
     books = []
-    books << Book.new(
+    book = Book.new(
       author: hash_books.authors.author.name,
       cover: hash_books.image_url,
       description: hash_books.description,
       isbn: hash_books.isbn,
       isbn13: hash_books.isbn13,
-      original_publication: Date.parse(hash_books.work.original_publication_year.to_s + '-01-01'),
+      #original_publication: Date.parse(hash_books.work.original_publication_year.to_s + '-01-01'),
       pages: hash_books.num_pages,
       publication: Date.parse(hash_books.work.publication_year.to_s + '-01-01'),
       publisher: hash_books.publisher,
       rating: hash_books.average_rating,
       title: hash_books.title
     )
+    if hash_books.work.original_publication_year > 0
+      book.original_publication = Date.parse(hash_books.work.original_publication_year.to_s + '-01-01')
+    else
+      book.original_publication = Date.new(0003-01-01)
+    end
+    books << book
     return books
   end
 
-  def self.search(isbn,title)
+  def self.search(isbn, options = {})
     # Start GoodReads API request
     client = Goodreads.new
     books = []
+    books_found = []
+    books_not_found = []
     if !isbn.blank?
-      books = Book.fetch_info(client.book_by_isbn(isbn))
-    elsif !title.blank?
-      books = Book.fetch_info(client.book_by_title(title))  
+      if isbn.is_a?(Array)
+        isbn.each do |isbn_single|
+          begin
+            books << Book.fetch_info(client.book_by_isbn(isbn_single))
+            books_found << isbn_single
+            p isbn_single + ' => ok'
+          rescue
+            books_not_found << isbn_single
+            p isbn_single + ' => ko'
+          end
+        end
+        books = books.flatten
+      else
+        books = Book.fetch_info(client.book_by_isbn(isbn))
+      end
+    elsif !options[:title].blank?
+      books = Book.fetch_info(client.book_by_title(options[:title]))  
     end
-    return books
+    if options[:user_id]
+      books.each do |book|
+        book.user_id = options[:user_id]
+      end
+    end
+    if options[:save_search]
+      books.each do |book|
+        book.save
+      end
+    end
+    return { ok: [books_found.size, books_found], ko: [books_not_found.size, books_not_found] }
   end
 end
