@@ -3,6 +3,12 @@ fr:
     boolean:
       is_true: "Oui"
       is_false: "Non"
+    pagination:
+      first: "&laquo;&nbsp;"
+      last: "&nbsp;&raquo;"
+      previous: "&nbsp;&lsaquo;&nbsp;"
+      next: "&nbsp;&rsaquo;&nbsp;"
+      truncate: "..."
   model:
     book:
       status:
