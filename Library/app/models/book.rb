@@ -76,6 +76,6 @@ class Book < ActiveRecord::Base
         book.save
       end
     end
-    return { ok: [books_found.size, books_found], ko: [books_not_found.size, books_not_found] }
+    p { ok: [books_found.size, books_found], ko: [books_not_found.size, books_not_found] }
   end
 end
